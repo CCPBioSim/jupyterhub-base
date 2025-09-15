@@ -213,6 +213,6 @@ jobs:
         uses: peter-evans/repository-dispatch@v3.0.0
         with:
           token: ${{ secrets.BUILD_TOKEN }}
-          repository: jimboid/biosim-${{ matrix.repos }}
+          repository: ccpbiosim/${{ matrix.repos }}
           event-type: build    
           client-payload: '{"tag": "${{ needs.build.outputs.tag }}"}'
