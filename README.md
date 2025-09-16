@@ -1,7 +1,7 @@
 CCPBioSim Jupyterhub base container
 ===================================
 
-[![base container](https://github.com/jimboid/biosim-jupyterhub-base/actions/workflows/build.yaml/badge.svg?branch=main)](https://github.com/jimboid/biosim-jupyterhub-base/actions/workflows/build.yaml)
+[![base container](https://github.com/ccpbiosim/jupyterhub-base/actions/workflows/build.yaml/badge.svg?branch=main)](https://github.com/ccpbiosim/jupyterhub-base/actions/workflows/build.yaml)
 
 This container is derived from the jupyter/base-notebook:hub image. We have
 modified it to include some extra software utilities and web-services specific
