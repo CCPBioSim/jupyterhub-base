@@ -15,6 +15,7 @@ jobs:
           - linux/arm64
     runs-on: ${{ matrix.platform == 'linux/amd64' && 'ubuntu-24.04' || matrix.platform == 'linux/arm64' && 'ubuntu-24.04-arm' }}
     name: build ${{ matrix.platform }}
+    timeout-minutes: 30
     outputs:
       tag: ${{ steps.envvars.outputs.tag }}
     steps:
@@ -55,6 +56,12 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           tags: ghcr.io/${{ vars.ORG_REPO }}/${{ github.event.repository.name }}
           outputs: type=image,push-by-digest=true,name-canonical=true,push=true
+
+      - name: Run tests
+        shell: bash
+        run: |
+          docker run -t ghcr.io/${{ vars.ORG_REPO }}/${{ github.event.repository.name }}:${{ steps.build.outputs.digest }} bash -c " \
+            mamba install -c conda-forge -y aiida-core; "
 
       - name: Export digest
         run: |
@@ -126,34 +133,12 @@ jobs:
         run: |
           docker buildx imagetools inspect ghcr.io/${{ vars.ORG_REPO }}/${{ github.event.repository.name }}:dev
 
-  tests:
-    strategy:
-      fail-fast: false
-      matrix:
-        platform:
-          - linux/amd64
-          - linux/arm64
-    runs-on: ${{ matrix.platform == 'linux/amd64' && 'ubuntu-latest' || matrix.platform == 'linux/arm64' && 'ubuntu-24.04-arm' }}
-    name: testing on ${{ matrix.platform }} 
-    timeout-minutes: 30
-    needs: 
-      - build
-      - merge
-    steps:
-
-      - name: Test notebooks
-        shell: bash
-        run: |
-          docker run -t ghcr.io/${{ vars.ORG_REPO }}/${{ github.event.repository.name }}:dev bash -c " \
-            mamba install -c conda-forge -y aiida-core; "
-
   tags:
     runs-on: ubuntu-24.04
     if: github.event_name != 'pull_request'
     name: add tags
     needs:
       - build
-      - tests
     steps:
       - name: Authenticate with GHCR
         id: auth
