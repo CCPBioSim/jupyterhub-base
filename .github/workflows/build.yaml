@@ -2,7 +2,7 @@ name: ci/cd
 on:
   workflow_dispatch:
   schedule:
-    - cron: '30 9 * * 1,3' # runs workflow every Monday and Wednesday at 9:30 UTC.
+    - cron: '30 9 * * 1' # runs workflow every Monday and Wednesday at 9:30 UTC.
   pull_request:
 
 jobs:
