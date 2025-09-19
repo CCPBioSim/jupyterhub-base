@@ -1,8 +1,8 @@
 # Start with JupyterHub image.
-FROM quay.io/jupyter/base-notebook:82d322f00937
+FROM quay.io/jupyter/base-notebook:3b755d1c0c87
 
 LABEL maintainer="James Gebbie-Rayet <james.gebbie@stfc.ac.uk>"
-LABEL org.opencontainers.image.source=https://github.com/jimboid/biosim-jupyterhub-base
+LABEL org.opencontainers.image.source=https://github.com/ccpbiosim/jupyterhub-base
 LABEL org.opencontainers.image.description="A base container image derived from jupyterhub base containers with some extra utilities installed."
 LABEL org.opencontainers.image.licenses=MIT
 
