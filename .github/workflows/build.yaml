@@ -80,7 +80,7 @@ jobs:
   tags:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-24.04
-    name: merge into multiarch manifest
+    name: merge and tag
     needs:
       - build
     steps:
@@ -171,7 +171,7 @@ jobs:
                 "qmmm-workshop",
                 "structure-validation-workshop",
                 "ubiquitin-analysis-workshop"]
-    name: jupyterhub-${{ matrix.jupyter-base }}
+    name: trigger ${{ matrix.repo }}
     steps:  
       - name: Trigger to build workshops
         uses: peter-evans/repository-dispatch@v3.0.0
