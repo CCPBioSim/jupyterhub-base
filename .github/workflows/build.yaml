@@ -145,7 +145,6 @@ jobs:
         shell: bash
         run: |
           docker run -t ghcr.io/${{ vars.ORG_REPO }}/${{ github.event.repository.name }}:dev bash -c " \
-            conda install mamba; \
             mamba install -c conda-forge -y aiida-core; "
 
   tags:
