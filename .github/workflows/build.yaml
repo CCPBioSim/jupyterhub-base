@@ -2,7 +2,7 @@ name: ci/cd
 on:
   workflow_dispatch:
   schedule:
-    - cron: '30 9 * * 1,3' # runs workflow every Monday and Wednesday at 9:30 UTC.
+    - cron: '30 9 * * 1' # runs workflow every Monday and Wednesday at 9:30 UTC.
   pull_request:
 
 jobs:
@@ -145,7 +145,6 @@ jobs:
         shell: bash
         run: |
           docker run -t ghcr.io/${{ vars.ORG_REPO }}/${{ github.event.repository.name }}:dev bash -c " \
-            conda install mamba; \
             mamba install -c conda-forge -y aiida-core; "
 
   tags:
@@ -180,39 +179,39 @@ jobs:
           event-type: build    
           client-payload: '{"repo": "${{ github.event.repository.name }}", "tag": "${{ needs.build.outputs.tag }}"}'
 
-  # triggers:
-  #   runs-on: ubuntu-24.04
-  #   if: github.event_name != 'pull_request'
-  #   needs:
-  #     - build
-  #     - tags
-  #   strategy:
-  #     matrix:
-  #       repos: ["aiida-gpcr-workshop",
-  #               "aiida-lysozyme-workshop",
-  #               "basic-analysis-workshop",
-  #               "basic-statistics-workshop",
-  #               "beginners-workshop",
-  #               "clustering-workshop",
-  #               "codeentropy-workshop",
-  #               "docking-workshop",
-  #               "enhanced-sampling-workshop",
-  #               "equilibration-workshop",
-  #               "introamber-workshop",
-  #               "nemd-workshop",
-  #               "openff-workshop",
-  #               "pca-workshop",
-  #               "pdb2pqr-workshop",
-  #               "python-workshop",
-  #               "qmmm-workshop",
-  #               "structure-validation-workshop",
-  #               "ubiquitin-analysis-workshop"]
-  #   name: jupyterhub-${{ matrix.jupyter-base }}
-  #   steps:  
-  #     - name: Trigger to build workshops
-  #       uses: peter-evans/repository-dispatch@v3.0.0
-  #       with:
-  #         token: ${{ secrets.BUILD_TOKEN }}
-  #         repository: ccpbiosim/${{ matrix.repos }}
-  #         event-type: build    
-  #         client-payload: '{"tag": "${{ needs.build.outputs.tag }}"}'
+  triggers:
+    runs-on: ubuntu-24.04
+    if: github.event_name != 'pull_request'
+    needs:
+      - build
+      - tags
+    strategy:
+      matrix:
+        repos: ["aiida-gpcr-workshop",
+                "aiida-lysozyme-workshop",
+                "basic-analysis-workshop",
+                "basic-statistics-workshop",
+                #"beginners-workshop",
+                "clustering-workshop",
+                #"codeentropy-workshop",
+                "docking-workflow",
+                #"enhanced-sampling-workshop",
+                "equilibration-workshop",
+                #"introamber-workshop",
+                #"nemd-workshop",
+                #"openff-workshop",
+                "pca-workshop",
+                "pdb2pqr-workshop",
+                "python-workshop",
+                "qmmm-workshop",
+                "structure-validation-workshop",
+                "ubiquitin-analysis-workshop"]
+    name: jupyterhub-${{ matrix.jupyter-base }}
+    steps:  
+      - name: Trigger to build workshops
+        uses: peter-evans/repository-dispatch@v3.0.0
+        with:
+          token: ${{ secrets.BUILD_TOKEN }}
+          repository: ccpbiosim/${{ matrix.repos }}
+          event-type: build    
+          client-payload: '{"tag": "${{ needs.build.outputs.tag }}"}'
