@@ -137,7 +137,7 @@ jobs:
           docker buildx imagetools inspect ghcr.io/${{ vars.ORG_REPO }}/${{ github.event.repository.name }}:latest
 
       - name: Post version update to dash
-        uses: peter-evans/repository-dispatch@v3.0.0
+        uses: peter-evans/repository-dispatch@v4.0.0
         with:
           token: ${{ secrets.BUILD_TOKEN }}
           repository: ccpbiosim/ccpbiosim.github.io
@@ -174,7 +174,7 @@ jobs:
     name: trigger ${{ matrix.repo }}
     steps:  
       - name: Trigger to build workshops
-        uses: peter-evans/repository-dispatch@v3.0.0
+        uses: peter-evans/repository-dispatch@v4.0.0
         with:
           token: ${{ secrets.BUILD_TOKEN }}
           repository: ccpbiosim/${{ matrix.repos }}
