@@ -57,6 +57,7 @@ jobs:
             mamba install -c conda-forge -y aiida-core; "
 
       - name: Authenticate with GHCR
+        if: github.event_name != 'pull_request'
         id: auth
         uses: docker/login-action@v3.6.0
         with:
