@@ -184,6 +184,7 @@ jobs:
                 #"enhanced-sampling-workshop",
                 "equilibration-workshop",
                 #"introamber-workshop",
+                "mm-gbsa-workshop",
                 #"nemd-workshop",
                 #"openff-workshop",
                 "pca-workshop",
