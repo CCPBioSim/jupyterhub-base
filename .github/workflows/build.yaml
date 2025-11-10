@@ -189,7 +189,7 @@ jobs:
                 #"openff-workshop",
                 "pca-workshop",
                 "pdb2pqr-workshop",
-                "protein-analysis",
+                "protein-analysis-workshop",
                 "protein-ml-workshop",
                 "python-workshop",
                 "qmmm-workshop",
