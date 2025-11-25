@@ -178,6 +178,7 @@ jobs:
                 "basic-analysis-workshop",
                 "basic-statistics-workshop",
                 "clustering-workshop",
+                "coarse-graining-workshop",
                 "dna-workshop",
                 "docking-workflow",
                 #"enhanced-sampling-workshop",
