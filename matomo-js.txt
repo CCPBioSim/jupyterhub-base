@@ -2,19 +2,37 @@
 <!-- Matomo -->
 <script>
   var _paq = window._paq = window._paq || [];
-  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
 
-  _paq.push(['setCustomUrl', location.origin + '/notebooks/' + urlParams.get('profile')]);
-  _paq.push(['trackPageView']);
-  _paq.push(['enableLinkTracking']);
   (function() {
-    var u="https://www.ccpbiosim.ac.uk/matomo/";
-    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    var path = window.location.pathname;
+    var params = new URLSearchParams(window.location.search);
+
+    // Extract slug from ?profile= param
+    var slug = params.get('profile') || 'unknown-profile';
+
+    // Extract ORCID from path segments like /user/0000-0001-8271-3431/ or /spawn-pending/0000-0001-8271-3431
+    var orcidMatch = path.match(/\/(?:user|spawn-pending)\/(\d{4}-\d{4}-\d{4}-\d{3}[\dX])/);
+    var orcid = orcidMatch ? orcidMatch[1] : 'unauthenticated';
+
+    // Determine the current stage for the page title
+    var stage = 'spawn';
+    if (path.includes('/spawn-pending/')) stage = 'spawn-pending';
+    else if (path.includes('/user/') && path.includes('/lab')) stage = 'lab';
+
+    // Build a clean canonical URL: domain/slug/orcid/stage
+    var canonicalUrl = location.origin + '/notebooks/' + slug + '/' + orcid + '/' + stage;
+
+    _paq.push(['setCustomUrl', canonicalUrl]);
+    _paq.push(['setDocumentTitle', slug + ' — ' + stage]);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+
+    var u = "https://www.ccpbiosim.ac.uk/matomo/";
+    _paq.push(['setTrackerUrl', u + 'matomo.php']);
     _paq.push(['setSiteId', '1']);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+
+    var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+    g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
   })();
 </script>
 <!-- End Matomo Code -->
