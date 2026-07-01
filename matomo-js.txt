@@ -20,7 +20,7 @@
     else if (path.includes('/user/') && path.includes('/lab')) stage = 'lab';
 
     // Build a clean canonical URL: domain/slug/orcid/stage
-    var canonicalUrl = location.origin + '/notebooks/' + slug + '/' + orcid + '/' + stage;
+    var canonicalUrl = location.origin + '/' + slug + '/' + orcid + '/' + stage;
 
     _paq.push(['setCustomUrl', canonicalUrl]);
     _paq.push(['setDocumentTitle', slug + ' — ' + stage]);
