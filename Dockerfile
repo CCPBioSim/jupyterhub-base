@@ -51,9 +51,6 @@ RUN sed -e '/<\/body><\/html>/ {' -e 'r /tmp/matomo-js.txt' -e 'd' -e '}' -i /op
 USER $NB_USER
 WORKDIR $HOME
 
-# Add authenticator
-RUN pip install jupyterhub-tmpauthenticator
-
 # Remove work directory as it not required.
 RUN rm -r $HOME/work
 
