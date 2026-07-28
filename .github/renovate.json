@@ -4,5 +4,5 @@
   "timezone": "Europe/London",
   "schedule": ["after 9am and before 5pm"],
   "assignees": ["jimboid"],
-  "enabledManagers": ["github-actions"],
+  "enabledManagers": ["github-actions", "docker"],
 }
