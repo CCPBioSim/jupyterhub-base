@@ -1,8 +1,26 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended", "docker:pinDigests"],
+  "extends": [
+    "config:best-practices",
+    "docker:pinDigests",
+    "helpers:pinGitHubActionDigestsToSemver"
+  ],
   "timezone": "Europe/London",
   "schedule": ["after 9am and before 5pm every weekday"],
   "assignees": ["jimboid"],
+  "dependencyDashboard": true,
+  "minimumReleaseAge": "3 days",
   "enabledManagers": ["github-actions", "dockerfile"],
+  "packageRules": [
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions",
+      "addLabels": ["ci", "dependencies"]
+    },
+    {
+      "matchManagers": ["dockerfile"],
+      "groupName": "Docker",
+      "addLabels": ["docker", "dependencies"]
+    }
+  ]
 }
