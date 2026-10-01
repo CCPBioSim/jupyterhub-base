@@ -196,7 +196,7 @@ jobs:
                 "qmmm-workshop",
                 "structure-validation-workshop",
                 "ubiquitin-analysis-workshop"]
-    name: trigger ${{ matrix.repo }}
+    name: trigger ${{ matrix.repos }}
     steps:  
       - name: Trigger to build workshops
         uses: peter-evans/repository-dispatch@28959ce8df70de7be546dd1250a005dd32156697 # v4.0.1
