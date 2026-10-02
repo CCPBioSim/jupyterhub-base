@@ -100,7 +100,7 @@ jobs:
 
   tags:
     if: github.event_name != 'pull_request'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     name: merge and tag
     needs:
       - build
@@ -166,7 +166,7 @@ jobs:
           client-payload: '{"repo": "${{ github.event.repository.name }}", "tag": "${{ needs.build.outputs.tag }}"}'
 
   triggers:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     if: github.event_name != 'pull_request'
     needs:
       - build
