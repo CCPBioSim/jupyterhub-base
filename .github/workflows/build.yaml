@@ -203,5 +203,5 @@ jobs:
         with:
           token: ${{ secrets.BUILD_TOKEN }}
           repository: ccpbiosim/${{ matrix.repos }}
-          event-type: build    
+          event-type: workshops    
           client-payload: '{"tag": "${{ needs.build.outputs.tag }}"}'
