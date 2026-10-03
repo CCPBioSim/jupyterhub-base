@@ -1,0 +1,5 @@
+name: CCPBioSim Base Image
+category: infrastructure
+authors: ""
+shortdesc: CCPBioSim JupyterHub base container for use in other training workshops.
+longdesc: ""
