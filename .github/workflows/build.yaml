@@ -217,5 +217,5 @@ jobs:
         with:
           token: ${{ secrets.BUILD_TOKEN }}
           repository: ccpbiosim/${{ matrix.repos }}
-          event-type: workshops    
+          event-type: build    
           client-payload: '{"tag": "${{ needs.build.outputs.tag }}"}'
