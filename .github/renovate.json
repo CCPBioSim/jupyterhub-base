@@ -8,7 +8,9 @@
   "timezone": "Europe/London",
   "schedule": ["after 9am and before 5pm every weekday"],
   "assignees": ["jimboid"],
-  "dependencyDashboard": true,
+  "dependencyDashboard": {
+    "enabled": true
+  },
   "minimumReleaseAge": "3 days",
   "enabledManagers": ["github-actions", "dockerfile"],
   "packageRules": [
